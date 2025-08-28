@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creator's Hub - Sua Central de Conteúdo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #9ca3af;
+            --success: #059669;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 32px;
+            color: var(--primary);
+        }
+        
+        .logo h1 {
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-google {
+            background: #db4437;
+            color: white;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .platforms {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .platform {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .platform:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .platform i {
+            font-size: 24px;
+        }
+        
+        .platform-youtube i { color: #ff0000; }
+        .platform-tiktok i { color: #000000; }
+        .platform-instagram i { color: #e1306c; }
+        .platform-twitter i { color: #1da1f2; }
+        .platform-facebook i { color: #1877f2; }
+        .platform-reddit i { color: #ff4500; }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .card-header i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        .card h3 {
+            font-size: 18px;
+            color: var(--dark);
+        }
+        
+        .best-times {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .time-badge {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .time-badge i {
+            color: var(--success);
+        }
+        
+        .search-box {
+            display: flex;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            height: calc(100% - 10px);
+            padding: 0 25px;
+            border-radius: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: var(--success);
+            color: white;
+        }
+        
+        .ai-chat {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+        
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .chat-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .ai-message {
+            background: #e5e7eb;
+            color: var(--dark);
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            outline: none;
+        }
+        
+        .chat-input button {
+            padding: 15px 25px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: white;
+        }
+        
+        /* Modal de Login/Cadastro */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--gray);
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-rocket"></i>
+                <h1>Content Creator's Hub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Início</a></li>
+                    <li><a href="#">Prompts</a></li>
+                    <li><a href="#">Horários</a></li>
+                    <li><a href="#">Tags</a></li>
+                    <li><a href="#">Perfil</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="signup-btn"><i class="fas fa-user"></i> Cadastrar</button>
+                <button class="btn btn-primary" id="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h2><i class="fas fa-chart-line"></i> Melhores Horários</h2>
+                <div class="platforms">
+                    <div class="platform platform-youtube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </div>
+                    <div class="platform platform-tiktok">
+                        <i class="fab fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </div>
+                    <div class="platform platform-instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </div>
+                    <div class="platform platform-twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </div>
+                    <div class="platform platform-facebook">
+                        <i class="fab fa-facebook"></i>
+                        <span>Facebook</span>
+                    </div>
+                    <div class="platform platform-reddit">
+                        <i class="fab fa-reddit"></i>
+                        <span>Reddit</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <h2 class="section-title"><i class="fas fa-magic"></i> Gerador de Conteúdo com IA</h2>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fab fa-youtube"></i>
+                            <h3>YouTube</h3>
+                        </div>
+                        <p>Melhores horários para postar:</p>
+                        <div class="best-times">
+                            <div class="time-badge"><i class="fas fa-clock"></i> 14h - 16h</div>
+                            <div class="time-badge"><i class="fas fa-clock"></i> 19h - 22h</div>
+                        </div>
+                        <p>Melhores dias:</p>
+                        <div class="best-times">
+                            <div class="time-badge"><i class="fas fa-calendar"></i> Sábado</div>
+                            <div class="time-badge"><i class="fas fa-calendar"></i> Domingo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fab fa-tiktok"></i>
+                            <h3>TikTok</h3>
+                        </div>
+                        <p>Melhores horários para postar:</p>
+                        <div class="best-times">
+                            <div class="time-badge"><i class="fas fa-clock"></i> 9h - 11h</div>
+                            <div class="time-badge"><i class="fas fa-clock"></i> 19h - 23h</div>
+                        </div>
+                        <p>Melhores dias:</p>
+                        <div class="best-times">
+                            <div class="time-badge"><i class="fas fa-calendar"></i> Terça</div>
+                            <div class="time-badge"><i class="fas fa-calendar"></i> Quinta</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fab fa-instagram"></i>
+                            <h3>Instagram</h3>
+                        </div>
+                        <p>Melhores horários para postar:</p>
+                        <div class="best-times">
+                            <div class="time-badge"><i class="fas fa-clock"></i> 11h - 13h</div>
+                            <div class="time-badge"><i class="fas fa-clock"></i> 19h - 21h</div>
+                        </div>
+                        <p>Melhores dias:</p>
+                        <div class="best-times">
+                            <div class="time-badge"><i class="fas fa-calendar"></i> Quarta</div>
+                            <div class="time-badge"><i class="fas fa-calendar"></i> Sexta</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title"><i class="fas fa-hashtag"></i> Tags Virais por Nicho</h2>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="Digite seu nicho de conteúdo...">
+                    <button><i class="fas fa-search"></i> Buscar</button>
+                </div>
+                
+                <div class="tags-container">
+                    <div class="tag">#gameplay</div>
+                    <div class="tag">#gamer</div>
+                    <div class="tag">#dicasdegames</div>
+                    <div class="tag">#game</div>
+                    <div class="tag">#games</div>
+                    <div class="tag">#gaming</div>
+                    <div class="tag">#gamergirl</div>
+                    <div class="tag">#gameplay</div>
+                    <div class="tag">#gamer</div>
+                    <div class="tag">#dicasdegames</div>
+                </div>
+
+                <div class="ai-chat">
+                    <div class="chat-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4711/4711986.png" alt="AI Assistant">
+                        <h3>Assistente de Conteúdo com GPT-4</h3>
+                    </div>
+                    
+                    <div class="chat-messages">
+                        <div class="message ai-message">
+                            Olá! Sou seu assistente de conteúdo. Posso ajudar a criar prompts, ideias e estratégias para suas redes sociais. O que você gostaria de criar hoje?
+                        </div>
+                        <div class="message user-message">
+                            Preciso de ideias para vídeos no TikTok sobre fitness para iniciantes.
+                        </div>
+                        <div class="message ai-message">
+                            Claro! Aqui estão algumas ideias: 1. "3 erros comuns de iniciantes na academia", 2. "Exercícios que você pode fazer em casa sem equipamentos", 3. "Minha evolução em 30 dias de treino". Quer que eu desenvolva mais alguma?
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" placeholder="Digite sua mensagem...">
+                        <button><i class="fas fa-paper-plane"></i> Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Content Creator's Hub &copy; 2023 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Login -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Fazer Login</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox"> Lembrar-me
+                    </label>
+                    <a href="#" style="color: var(--primary); text-decoration: none;">Esqueci minha senha</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+                
+                <div class="divider"><span>ou</span></div>
+                
+                <button type="button" class="btn btn-google" style="width: 100%;">
+                    <i class="fab fa-google"></i> Continuar com Google
+                </button>
+                
+                <div class="form-footer">
+                    <p>Não tem uma conta? <a href="#" id="go-to-signup" style="color: var(--primary); text-decoration: none;">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Criar Conta</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Nome Completo</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">E-mail</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Senha</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirmar Senha</label>
+                    <input type="password" id="signup-confirm-password" required>
+                </div>
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" required> Aceito os <a href="#" style="color: var(--primary);">Termos de Uso</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Criar Conta</button>
+                
+                <div class="divider"><span>ou</span></div>
+                
+                <button type="button" class="btn btn-google" style="width: 100%;">
+                    <i class="fab fa-google"></i> Continuar com Google
+                </button>
+                
+                <div class="form-footer">
+                    <p>Já tem uma conta? <a href="#" id="go-to-login" style="color: var(--primary); text-decoration: none;">Fazer Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Simulação de funcionalidades
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const loginBtn = document.getElementById('login-btn');
+            const signupBtn = document.getElementById('signup-btn');
+            const loginModal = document.getElementById('login-modal');
+            const signupModal = document.getElementById('signup-modal');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            const goToSignup = document.getElementById('go-to-signup');
+            const goToLogin = document.getElementById('go-to-login');
+            
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'flex';
+            });
+            
+            signupBtn.addEventListener('click', () => {
+                signupModal.style.display = 'flex';
+            });
+            
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    loginModal.style.display = 'none';
+                    signupModal.style.display = 'none';
+                });
+            });
+            
+            goToSignup.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'flex';
+            });
+            
+            goToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) loginModal.style.display = 'none';
+                if (e.target === signupModal) signupModal.style.display = 'none';
+            });
+            
+            // Form submissions
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Login realizado com sucesso!');
+                loginModal.style.display = 'none';
+            });
+            
+            document.getElementById('signup-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Conta criada com sucesso!');
+                signupModal.style.display = 'none';
+            });
+            
+            // Simulação de busca de tags
+            const searchInput = document.querySelector('.search-box input');
+            const searchButton = document.querySelector('.search-box button');
+            
+            searchButton.addEventListener('click', function() {
+                const niche = searchInput.value.trim();
+                if (niche) {
+                    alert(`Buscando tags virais para o nicho: ${niche}`);
+                    // Aqui viria a integração com a API para buscar tags
+                }
+            });
+            
+            // Simulação de chat
+            const chatInput = document.querySelector('.chat-input input');
+            const chatButton = document.querySelector('.chat-input button');
+            const chatMessages = document.querySelector('.chat-messages');
+            
+            chatButton.addEventListener('click', function() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Adiciona mensagem do usuário
+                    const userMessage = document.createElement('div');
+                    userMessage.classList.add('message', 'user-message');
+                    userMessage.textContent = message;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Simula resposta da IA
+                    setTimeout(() => {
+                        const aiMessage = document.createElement('div');
+                        aiMessage.classList.add('message', 'ai-message');
+                        aiMessage.textContent = "Entendi sua solicitação! Vou ajudar a criar conteúdo sobre " + message;
+                        chatMessages.appendChild(aiMessage);
+                        
+                        // Rolagem para baixo
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                    
+                    // Limpa o input
+                    chatInput.value = '';
+                    
+                    // Rolagem para baixo
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+            
+            // Permitir enviar com Enter
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    chatButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
